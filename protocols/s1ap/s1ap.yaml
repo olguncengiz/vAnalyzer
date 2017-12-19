@@ -1,0 +1,1512 @@
+# PROTOCOL NAME: S1AP
+# PROTOCOL PORT: port 36412
+
+# ************* IMPORTANT *************
+# DO NOT CHANGE OR REMOVE THESE LINES #
+query: {
+    or:[
+# ************* IMPORTANT *************
+
+        # MESSAGES FOR S1AP Protocol #
+        # Use the same structure to add a new message
+        # or to modify existing
+
+        # Cell Traffic Trace Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.celltraffictrace
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Deactivate Trace Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.deactivatetrace
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Downlink NAS Transport Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.downlinknastransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.nas_pdu
+                    }
+                }
+            ]
+        ],
+
+        # Downlink Non UE Associated LPPa Transport Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.downlinknonueassociatedlppatransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.routing_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.lppa_pdu
+                    }
+                }
+            ]
+        ],
+
+        # Downlink S1 cdma2000 tunneling Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.downlinks1cdma2000tunneling
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.cdma2000rattype
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.cdma2000pdu
+                    }
+                }
+            ]
+        ],
+
+        # Downlink UE Associated LPPa Transport Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.downlinkueassociatedlppatransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.routing_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.lppa_pdu
+                    }
+                }
+            ]
+        ],
+
+        # ENB Configuration Transfer Message
+        # No Critical Fields for this message
+        # and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.enbconfigurationtransfer
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # ENB Configuration Update Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.downlinkueassociatedlppatransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.tac
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.plmnidentity
+                    }
+                }
+            ]
+        ],
+
+        # ENB Configuration Update Acknowledge Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.enbconfigurationupdateacknowledge
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # ENB Configuration Update Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.enbconfigurationupdatefailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # ENB Direct Information Transfer Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.enbdirectinformationtransfer
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.inter_systeminformationtransfertype
+                }
+            }
+        ],
+
+        # ENB Status Transfer Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.enbstatustransfer
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # E-RAB Modify Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.e_rabmodifyrequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.e_rab_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.routing_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.lppa_pdu
+                    }
+                }
+            ]
+        ],
+
+        # E-RAB Modify Response Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.e_rabmodifyresponse
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # E-RAB Release Command Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.e_rabreleasecommand
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # E-RAB Release Indication Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.e_rabreleaseindication
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # E-RAB Release Response Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.e_rabreleaseresponse
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # E-RAB Setup Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.e_rabsetuprequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.e_rab_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.e_rablevelqosparameters
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.transportlayeraddress
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.gtp_teid
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.nas_pdu
+                    }
+                }
+            ]
+        ],
+
+        # E-RAB Setup Response Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.e_rabsetupresponse
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Error Indication Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.errorindication
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Handover Cancel Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.handovercancel
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Handover Cancel Acknowledge Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.handovercancelacknowledge
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Handover Command Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.handovercommand
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.handovertype
+                    }
+                },
+                # Fixme: C - iftoUTRANGERAN
+                not: {
+                    exists: {
+                        field: layers.s1ap.nassecurityparametersfrome_utran
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.target_tosource_transparentcontainer
+                    }
+                }
+            ]
+        ],
+
+        # Handover Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.handoverfailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Handover Notify Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.handovernotify
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Handover Preparation Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.handoverpreparationfailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Handover Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.handoverrequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.handovertype
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.ueaggregatemaximumbitrate
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.source_totarget_transparentcontainer
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.uesecuritycapabilities
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.securitycontext
+                    }
+                },
+                # Fixme: C-iffromUTRANGERAN
+                not: {
+                    exists: {
+                        field: layers.s1ap.nassecurityparameterstoe_utran
+                    }
+                }
+            ]
+        ],
+
+        # Handover Request Acknowledge Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.handoverrequestacknowledge
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.target_tosource_transparentcontainer
+                }
+            }
+        ],
+
+        # Handover Required Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.handoverrequired
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.handovertype
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.targetid
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.source_totarget_transparentcontainer
+                    }
+                },
+                # Fixme: C - ifSRVCCtoGERAN
+                not: {
+                    exists: {
+                        field: layers.s1ap.msclassmark2
+                    }
+                }
+            ]
+        ],
+
+        # Initial Context Setup Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.initialcontextsetupfailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Initial Context Setup Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.initialcontextsetuprequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.ueaggregatemaximumbitrate
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.e_rab_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.e_rablevelqosparameters
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.transportlayeraddress
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.gtp_teid
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.uesecuritycapabilities
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.securitykey
+                    }
+                }
+            ]
+        ],
+
+        # Initial Initial Context Setup Response Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.initialcontextsetupresponse
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Initial UE Message Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.initialuemessage
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.nas_pdu
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.tai
+                    }
+                }
+            ]
+        ],
+
+        # Kill Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.killrequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.killrequest_element
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.serialnumber
+                    }
+                }
+            ]
+        ],
+
+        # Kill Response Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.killresponse
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.killrequest_element
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.serialnumber
+                    }
+                }
+            ]
+        ],
+
+        # Location Report Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.locationreport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Location Reporting Control Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.locationreportingcontrol
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Location Reporting Failure Indication Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.locationreportingfailureindication
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # MME Configuration Transfer Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.mmeconfigurationtransfer
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # MME Configuration Update Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.mmeconfigurationupdate
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.plmnidentity
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_group_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_code
+                    }
+                }
+            ]
+        ],
+
+        # MME Configuration Update Acknowledge Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.mmeconfigurationupdateacknowledge
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # MME Direct Information Transfer Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.mmedirectinformationtransfer
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.inter_systeminformationtransfertype
+                }
+            }
+        ],
+
+        # MME Status Transfer Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.mmestatustransfer
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # MME MMEConfigurationUpdateFailure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.mmeconfigurationupdatefailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # NAS Non Delivery Indication Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.nasnondeliveryindication
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Overload Start Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.overloadstart
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.overloadresponse
+                }
+            }
+        ],
+
+        # Overload Stop Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.overloadstop
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Paging Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.paging
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.ueidentityindexvalue
+                }
+            }
+        ],
+
+        # Path Switch Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.pathswitchrequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.e_rab_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.transportlayeraddress
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.gtp_teid
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Path Switch Request Acknowledge Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.pathswitchrequestacknowledge
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.securitycontext
+                }
+            }
+        ],
+
+        # Path Switch Request Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.pathswitchrequestfailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Reset Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.reset
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.resettype
+                }
+            }
+        ],
+
+        # Reset Acknowledge Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.resetacknowledge
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # S1 Setup Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.s1setupfailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # S1 Setup Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.s1setuprequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.global_enb_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.tac
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.plmnidentity
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.csg_id
+                    }
+                }
+            ]
+        ],
+
+        # S1 Setup Response Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.s1setupresponse
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.plmnidentity
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_group_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_code
+                    }
+                }
+            ]
+        ],
+
+        # SON Configuration Transfer Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.sonconfigurationtransfer
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # Trace Failure Indication Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.tracefailureindication
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # Trace Start Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.tracestart
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # UE Capability Info Indication Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uecapabilityinfoindication
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # UE Context Modification Failure Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.uecontextmodificationfailure
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # UE Context Modification Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uecontextmodificationrequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # UE Context Modification Response Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.uecontextmodificationresponse
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # UE Context Release Command Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uecontextreleasecommand
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # UE Context Release Complete Message
+        # No Critical Fields for this message
+        #and: [
+        #    # Message Type
+        #    exists: {
+        #        field: layers.s1ap.uecontextreleasecomplete
+        #    },
+        #    # Message Fields to Check
+        #    # No Critical Fields for this message
+        #],
+
+        # UE Context Release Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uecontextreleaserequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # UE Radio Capability Match Request Message
+        and: [
+            # Message Type
+            # Fixme: Verify if Message Type is Correct
+            exists: {
+                field: layers.s1ap.ueradiocapabilitymatchrequest_element
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                }
+            ]
+        ],
+
+        # UE Radio Capability Match Response Message
+        and: [
+            # Message Type
+            # Fixme: Verify if Message Type is Correct
+            exists: {
+                field: layers.s1ap.ueradiocapabilitymatchresponse_element
+            },
+            # Message Fields to Check
+            not: {
+                exists: {
+                    field: layers.s1ap.voicesupportmatchindicator
+                }
+            }
+        ],
+
+        # Uplink Non UE Associated LPPa Transport Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uplinknonueassociatedlppatransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.routing_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.lppa_pdu
+                    }
+                }
+            ]
+        ],
+
+        # Uplink S1 cdma2000 tunneling Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uplinks1cdma2000tunneling
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.cdma2000rattype
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.cdma2000sectorid
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.cdma2000pdu
+                    }
+                }
+            ]
+        ],
+
+        # Uplink UE Associated LPPa Transport Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uplinkueassociatedlppatransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.routing_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.lppa_pdu
+                    }
+                }
+            ]
+        ],
+
+        # UplinkNASTransport Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.uplinknastransport
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.mme_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.enb_ue_s1ap_id
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.nas_pdu
+                    }
+                }
+            ]
+        ],
+
+        # Write Replace Warning Request Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.writereplacewarningrequest
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.writereplacewarningrequest_element
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.serialnumber
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.repetitionperiod
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.numberofbroadcastrequest
+                    }
+                }
+            ]
+        ],
+
+        # Write Replace Warning Response Message
+        and: [
+            # Message Type
+            exists: {
+                field: layers.s1ap.writereplacewarningresponse
+            },
+            # Message Fields to Check
+            or: [
+                not: {
+                    exists: {
+                        field: layers.s1ap.writereplacewarningresponse_element
+                    }
+                },
+                not: {
+                    exists: {
+                        field: layers.s1ap.serialnumber
+                    }
+                }
+            ]
+        ],
+
+# ************* IMPORTANT *************
+# DO NOT CHANGE OR REMOVE THESE LINES #
+    # End "or" Statement
+    ]
+}
+# ************* IMPORTANT *************

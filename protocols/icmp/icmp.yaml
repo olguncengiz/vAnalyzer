@@ -1,0 +1,15 @@
+# PROTOCOL NAME: ICMP
+# PROTOCOL PORT: icmp
+
+query: {
+    and: [
+        term: {
+            protocol: icmp
+        },
+        not: {
+            exists: {
+                field: layers.icmp.type
+            }
+        }
+    ]
+}

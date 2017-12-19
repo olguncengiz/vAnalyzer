@@ -1,0 +1,693 @@
+# PROTOCOL NAME: diameter
+# PROTOCOL PORT: 
+
+# ************* IMPORTANT *************
+# DO NOT CHANGE OR REMOVE THESE LINES #
+query: {
+    or: [
+# ************* IMPORTANT *************
+
+        # User-Authorization-Answer (UAA) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 300 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x0* }},
+                { wildcard: { layers.diameter.flags: 0x1* }},
+                { wildcard: { layers.diameter.flags: 0x2* }},
+                { wildcard: { layers.diameter.flags: 0x3* }},
+                { wildcard: { layers.diameter.flags: 0x4* }},
+                { wildcard: { layers.diameter.flags: 0x5* }},
+                { wildcard: { layers.diameter.flags: 0x6* }},
+                { wildcard: { layers.diameter.flags: 0x7* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }}
+            ]}
+        ]},
+        
+        # User-Authorization-Request (UAR) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 300 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x8* }},
+                { wildcard: { layers.diameter.flags: 0x9* }},
+                { wildcard: { layers.diameter.flags: 0xa* }},
+                { wildcard: { layers.diameter.flags: 0xb* }},
+                { wildcard: { layers.diameter.flags: 0xc* }},
+                { wildcard: { layers.diameter.flags: 0xd* }},
+                { wildcard: { layers.diameter.flags: 0xe* }},
+                { wildcard: { layers.diameter.flags: 0xf* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.user-name
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.supported-features
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.public-identity
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.visited-network-identifier
+                    }
+                }}
+            ]}
+        ]},
+
+        # Server-Assignment-Request (SAR) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 301 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x8* }},
+                { wildcard: { layers.diameter.flags: 0x9* }},
+                { wildcard: { layers.diameter.flags: 0xa* }},
+                { wildcard: { layers.diameter.flags: 0xb* }},
+                { wildcard: { layers.diameter.flags: 0xc* }},
+                { wildcard: { layers.diameter.flags: 0xd* }},
+                { wildcard: { layers.diameter.flags: 0xe* }},
+                { wildcard: { layers.diameter.flags: 0xf* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.server-name
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.server-assignment-type
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.user-data-already-available
+                    }
+                }}
+            ]}
+        ]},
+
+        # Server-Assignment-Answer (SAA) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 301 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x0* }},
+                { wildcard: { layers.diameter.flags: 0x1* }},
+                { wildcard: { layers.diameter.flags: 0x2* }},
+                { wildcard: { layers.diameter.flags: 0x3* }},
+                { wildcard: { layers.diameter.flags: 0x4* }},
+                { wildcard: { layers.diameter.flags: 0x5* }},
+                { wildcard: { layers.diameter.flags: 0x6* }},
+                { wildcard: { layers.diameter.flags: 0x7* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.result-code
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.experimental-result
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }}
+            ]}
+        ]},
+        
+        # Location-Info-Request (LIR) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 302 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x8* }},
+                { wildcard: { layers.diameter.flags: 0x9* }},
+                { wildcard: { layers.diameter.flags: 0xa* }},
+                { wildcard: { layers.diameter.flags: 0xb* }},
+                { wildcard: { layers.diameter.flags: 0xc* }},
+                { wildcard: { layers.diameter.flags: 0xd* }},
+                { wildcard: { layers.diameter.flags: 0xe* }},
+                { wildcard: { layers.diameter.flags: 0xf* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.public-identity
+                    }
+                }}
+            ]}
+        ]},
+
+        # Location-Info-Answer (LIA) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 302 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x0* }},
+                { wildcard: { layers.diameter.flags: 0x1* }},
+                { wildcard: { layers.diameter.flags: 0x2* }},
+                { wildcard: { layers.diameter.flags: 0x3* }},
+                { wildcard: { layers.diameter.flags: 0x4* }},
+                { wildcard: { layers.diameter.flags: 0x5* }},
+                { wildcard: { layers.diameter.flags: 0x6* }},
+                { wildcard: { layers.diameter.flags: 0x7* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.result-code
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.experimental-result
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }}
+            ]}
+        ]},
+
+        # Multimedia-Auth-Request (MAR) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 303 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x8* }},
+                { wildcard: { layers.diameter.flags: 0x9* }},
+                { wildcard: { layers.diameter.flags: 0xa* }},
+                { wildcard: { layers.diameter.flags: 0xb* }},
+                { wildcard: { layers.diameter.flags: 0xc* }},
+                { wildcard: { layers.diameter.flags: 0xd* }},
+                { wildcard: { layers.diameter.flags: 0xe* }},
+                { wildcard: { layers.diameter.flags: 0xf* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.user-name
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.public-identity
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.sip-number-auth-items
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.sip-number-auth-items
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.sip-number-auth-items
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.sip-auth-data-item
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.server-name
+                    }
+                }}
+            ]}
+        ]},
+
+        # Multimedia-Auth-Answer (MAA) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 303 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x0* }},
+                { wildcard: { layers.diameter.flags: 0x1* }},
+                { wildcard: { layers.diameter.flags: 0x2* }},
+                { wildcard: { layers.diameter.flags: 0x3* }},
+                { wildcard: { layers.diameter.flags: 0x4* }},
+                { wildcard: { layers.diameter.flags: 0x5* }},
+                { wildcard: { layers.diameter.flags: 0x6* }},
+                { wildcard: { layers.diameter.flags: 0x7* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.result-code
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.experimental-result
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }}
+            ]}
+        ]},
+
+        # Registration-Termination-Request (RTR) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 304 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x8* }},
+                { wildcard: { layers.diameter.flags: 0x9* }},
+                { wildcard: { layers.diameter.flags: 0xa* }},
+                { wildcard: { layers.diameter.flags: 0xb* }},
+                { wildcard: { layers.diameter.flags: 0xc* }},
+                { wildcard: { layers.diameter.flags: 0xd* }},
+                { wildcard: { layers.diameter.flags: 0xe* }},
+                { wildcard: { layers.diameter.flags: 0xf* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.user-name
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.deregistration-reason
+                    }
+                }}
+            ]}
+        ]},
+
+        # Registration-Termination-Answer (RTA) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 304 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x0* }},
+                { wildcard: { layers.diameter.flags: 0x1* }},
+                { wildcard: { layers.diameter.flags: 0x2* }},
+                { wildcard: { layers.diameter.flags: 0x3* }},
+                { wildcard: { layers.diameter.flags: 0x4* }},
+                { wildcard: { layers.diameter.flags: 0x5* }},
+                { wildcard: { layers.diameter.flags: 0x6* }},
+                { wildcard: { layers.diameter.flags: 0x7* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.result-code
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.experimental-result
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }}
+            ]}
+        ]},
+
+        # Push-Profile-Request (PPR) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 305 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x8* }},
+                { wildcard: { layers.diameter.flags: 0x9* }},
+                { wildcard: { layers.diameter.flags: 0xa* }},
+                { wildcard: { layers.diameter.flags: 0xb* }},
+                { wildcard: { layers.diameter.flags: 0xc* }},
+                { wildcard: { layers.diameter.flags: 0xd* }},
+                { wildcard: { layers.diameter.flags: 0xe* }},
+                { wildcard: { layers.diameter.flags: 0xf* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.destination-realm
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.user-name
+                    }
+                }}
+            ]}
+        ]},
+
+        # Push-Profile-Answer (PPA) Command
+        { and: [
+            { wildcard: { layers.diameter.cmd_code: 305 }},
+            { or: [
+                { wildcard: { layers.diameter.flags: 0x0* }},
+                { wildcard: { layers.diameter.flags: 0x1* }},
+                { wildcard: { layers.diameter.flags: 0x2* }},
+                { wildcard: { layers.diameter.flags: 0x3* }},
+                { wildcard: { layers.diameter.flags: 0x4* }},
+                { wildcard: { layers.diameter.flags: 0x5* }},
+                { wildcard: { layers.diameter.flags: 0x6* }},
+                { wildcard: { layers.diameter.flags: 0x7* }}
+            ]},
+            { or:[
+                { not: {
+                    exists: {
+                        field: layers.diameter.session_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.vendor_specific_application_id
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.result-code
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.experimental-result
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.auth_session_state
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_host
+                    }
+                }},
+                { not: {
+                    exists: {
+                        field: layers.diameter.origin_realm
+                    }
+                }}
+            ]}
+        ]}
+# ************* IMPORTANT *************
+# DO NOT CHANGE OR REMOVE THESE LINES #
+    # End "or" Statement
+    ]
+}
+# ************* IMPORTANT *************
